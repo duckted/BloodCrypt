@@ -1,0 +1,161 @@
+package com.badlogic.bloodcrypt;
+
+
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
+
+public class Assets {
+
+
+    public static Texture sheetUP;
+    public static Texture sheetDOWN;
+    public static Texture sheetRIGHT;
+
+
+    public static Texture idleSheetUP;
+    public static Texture idleSheetDOWN;
+    public static Texture idleSheetRIGHT;
+
+
+    public static Texture slashSheetUP;
+    public static Texture slashSheetDOWN;
+    public static Texture slashSheetRIGHT;
+
+
+    public static Texture slimeSheetUP;
+    public static Texture slimeSheetDOWN;
+    public static Texture slimeSheetRIGHT;
+
+
+    public static Texture skeletonSheetUP;
+    public static Texture skeletonSheetDOWN;
+    public static Texture skeletonSheetRIGHT;
+
+
+    public static Animation<TextureRegion> walkUP;
+    public static Animation<TextureRegion> walkDOWN;
+    public static Animation<TextureRegion> walkRIGHT;
+    public static Animation<TextureRegion> walkLEFT;
+
+
+    public static Animation<TextureRegion> idleUP;
+    public static Animation<TextureRegion> idleDOWN;
+    public static Animation<TextureRegion> idleRIGHT;
+    public static Animation<TextureRegion> idleLEFT;
+
+
+    public static Animation<TextureRegion> slashUP;
+    public static Animation<TextureRegion> slashDOWN;
+    public static Animation<TextureRegion> slashRIGHT;
+    public static Animation<TextureRegion> slashLEFT;
+
+
+    public static Animation<TextureRegion> slimeRIGHT;
+    public static Animation<TextureRegion> slimeLEFT;
+    public static Animation<TextureRegion> slimeUP;
+    public static Animation<TextureRegion> slimeDOWN;
+
+
+    public static Animation<TextureRegion> skeletonRIGHT;
+    public static Animation<TextureRegion> skeletonLEFT;
+    public static Animation<TextureRegion> skeletonUP;
+    public static Animation<TextureRegion> skeletonDOWN;
+
+
+
+
+    public static void load() {
+        sheetUP = new Texture("sprites/character/RunU.png");
+        sheetDOWN = new Texture("sprites/character/RunD.png");
+        sheetRIGHT = new Texture("sprites/character/RunR.png");
+
+
+        idleSheetUP = new Texture("sprites/character/IdleU.png");
+        idleSheetDOWN = new Texture("sprites/character/IdleD.png");
+        idleSheetRIGHT = new Texture("sprites/character/IdleR.png");
+
+
+        slashSheetUP = new Texture("sprites/character/SlashU.png");
+        slashSheetDOWN = new Texture("sprites/character/SlashD.png");
+        slashSheetRIGHT = new Texture("sprites/character/SlashR.png");
+
+
+        //slimeSheetUP = new Texture("sprites/Slime/slimeRIGHT");
+        //slimeSheetDOWN = new Texture("sprites/Slime/slimeRIGHT");
+        //slimeSheetRIGHT = new Texture("sprites/Slime/slimeRIGHT");
+
+
+        //skeletonSheetUP = new Texture("sprites/Skeleton/skeletonRIGHT");
+        //skeletonSheetDOWN = new Texture("sprites/Skeleton/skeletonRIGHT");
+        //skeletonSheetRIGHT = new Texture("sprites/Skeleton/skeletonRIGHT");
+
+
+        walkUP = createRowAnimation(sheetUP, 32);
+        walkDOWN = createRowAnimation(sheetDOWN, 32);
+        walkRIGHT = createRowAnimation(sheetRIGHT, 32);
+        walkLEFT = createMirroredAnimation(sheetRIGHT, 32);
+
+
+        idleUP = createRowAnimation(idleSheetUP, 32);
+        idleDOWN = createRowAnimation(idleSheetDOWN, 32);
+        idleRIGHT = createRowAnimation(idleSheetRIGHT, 32);
+        idleLEFT = createMirroredAnimation(idleSheetRIGHT, 32);
+
+
+        slashUP = createRowAnimation(slashSheetUP, 32);
+        slashDOWN = createRowAnimation(slashSheetDOWN, 32);
+        slashRIGHT = createRowAnimation(slashSheetRIGHT, 32);
+        slashLEFT = createMirroredAnimation(slashSheetRIGHT, 32);
+    }
+
+
+    private static Animation<TextureRegion> createRowAnimation(Texture sheet, int frameWidth) {
+        int totalFrames = sheet.getWidth() / frameWidth;
+        int frameHeight = sheet.getHeight();
+        TextureRegion[][] tmp = TextureRegion.split(sheet, frameWidth, frameHeight);
+
+
+        TextureRegion[] frames = new TextureRegion[totalFrames];
+        int index = 0;
+        for (int j = 0; j < totalFrames; j++) {
+            frames[index++] = tmp[0][j];
+        }
+
+
+        return new Animation<>(0.1f, frames);
+    }
+
+
+    private static Animation<TextureRegion> createMirroredAnimation(Texture sheet, int frameWidth) {
+        int totalFrames = sheet.getWidth() / frameWidth;
+        int frameHeight = sheet.getHeight();
+        TextureRegion[][] tmp = TextureRegion.split(sheet, frameWidth, frameHeight);
+
+
+        TextureRegion[] frames = new TextureRegion[totalFrames];
+        int index = 0;
+        for (int j = 0; j < totalFrames; j++) {
+            TextureRegion region = tmp[0][j];
+            region.flip(true, false);  // Flip horizontally for left-facing animation
+            frames[index++] = region;
+        }
+
+
+        return new Animation<>(0.1f, frames);
+    }
+
+
+    public static void dispose() {
+        if (sheetUP != null) sheetUP.dispose();
+        if (sheetDOWN != null) sheetDOWN.dispose();
+        if (sheetRIGHT != null) sheetRIGHT.dispose();
+        idleSheetUP.dispose();
+        idleSheetDOWN.dispose();
+        idleSheetRIGHT.dispose();
+        slashSheetUP.dispose();
+        slashSheetDOWN.dispose();
+        slashSheetRIGHT.dispose();
+    }
+}
