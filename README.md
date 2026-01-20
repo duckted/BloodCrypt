@@ -1,5 +1,7 @@
 # BloodCrypt
 
+Bloodcrypt is a fast-paced 2D top-down dungeon crawler set deep within a cursed underground crypt overrun by demons. Players descend through blood-soaked chambers, claustrophobic corridors, and forgotten sanctums, fighting relentless waves of infernal enemies while uncovering the secrets buried beneath the dungeon.
+
 A [libGDX](https://libgdx.com/) project generated with [gdx-liftoff](https://github.com/libgdx/gdx-liftoff).
 
 This project was generated with a template including simple application launchers and an empty `ApplicationListener` implementation.
